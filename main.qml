@@ -2,328 +2,348 @@ import QtQuick 2.12
 import QtQuick.Window 2.12
 import QtQuick.VirtualKeyboard 2.4
 import QtQuick.Controls 2.5
-Window {
+ApplicationWindow {
     id: window
     visible: true
-    width: 1024
+      width: 1024
     height: 600
     title: qsTr("Hello World")
-    property var typ:""
-    property var str:""
-    property var pass:""
-    property var na:0
-
-    Connections {
-        target: bhanu
-        onList:
-        {
-           model.append({text:str1})
-            model1.append({text:str1})
-         }
-        onMod:{
-         if(b==true)
-         {
-           tf1.text=""
-             hint.text="NEW ACCOUNT IS CREATED...."
-             username.currentIndex=-1
-             comboBox1.currentIndex=-1
-         }
+        color: "black"
+        Timer {
+                interval: 3000; running: true; repeat: true
+                onTriggered:{
+                    window.close()
+                    load.source="comp1.qml"
+                }
+            }
+        Loader{
+            id:load
         }
-        onCount:
-        {
-            if(coun>=5)
-            {
-              tf1.activeFocusOnPress=true
-                hint.text="good"
-                str=username.editText
+    Rectangle {
+        id: rect1
+        x: 79
+        y: 65
+        opacity: 0
+        radius: 40
+        border.color: "#fdfdfd"
+        width: 80
+        height: 80
+        color: "black"
+        border.width: 4
+        OpacityAnimator{
+            target: rect1
+            from: 0
+            to:1
+            duration: 1000
+            running: true
+        }
+             ParallelAnimation on border.color{
+loops: Animation.Infinite
+                 PropertyAnimation{
+                     target: rect1;property: "y";easing.type: Easing.OutBounce; to:400;duration: 3000
+                 }
+                 SequentialAnimation{
+
+           ColorAnimation {target: rect1;property:"border.color";from: "red";to:"yellow"; duration: 500}
+           ColorAnimation{ target:element1;property:"color";from: "red";to:"yellow";duration: 500}
+
+           ColorAnimation {target: rect1;property:"border.color";from: "green";to:"blue"; duration: 500}
+           ColorAnimation{ target:element1;property:"color";from: "green";to:"blue";duration: 500}
+
+           ColorAnimation {target: rect1;property:"border.color";from: "yellow";to:"white"; duration: 500}
+           ColorAnimation{ target:element1;property:"color";from: "white";to:"red";duration: 500}
+
+                 }
+             }
+             Text {
+                 id: element1
+                 x: 28
+                 y: 24
+                 // anchors.fill: parent
+                 color: "red"
+                 text: qsTr("W")
+                 verticalAlignment: Text.AlignVCenter
+                 horizontalAlignment: Text.AlignHCenter
+                 font.pixelSize: 28
+
+             }
+
+    }
+
+    Rectangle {
+        id: rect2
+        x: 220
+        y: 65
+        width: 80
+        height: 80
+        color: "#000000"
+        radius: 40
+        border.color: "#fbfbfb"
+        opacity: 1
+             ParallelAnimation on border.color{
+                 loops: Animation.Infinite
+                 PropertyAnimation{
+                     target: rect2;property: "y";easing.type: Easing.InOutBounce; to:400;duration: 3000
+                 }
+                 SequentialAnimation{
+
+           ColorAnimation {target: rect2;property:"border.color";from: "red";to:"yellow"; duration: 500}
+           ColorAnimation{ target:element2;property:"color";from: "red";to:"yellow";duration: 500}
+           ColorAnimation {target: rect2;property:"border.color";from: "green";to:"blue"; duration: 500}
+           ColorAnimation{ target:element2;property:"color";from: "green";to:"blue";duration: 500}
+           ColorAnimation {target: rect2;property:"border.color";from: "yellow";to:"white"; duration: 500}
+           ColorAnimation{ target:element2;property:"color";from: "white";to:"red";duration: 500}
+                 }
+             }
+
+             Text {
+                 id: element2
+                 x: 28
+                 y: 24
+                 color: "#ff0000"
+                 //anchors.fill: parent
+                 text: qsTr("E")
+                 verticalAlignment: Text.AlignVCenter
+                 horizontalAlignment: Text.AlignHCenter
+                 font.pixelSize: 28
+             }
+             border.width: 4
+    }
+
+    Rectangle {
+        id: rect3
+        x: 356
+        y: 65
+        width: 80
+        height: 80
+        color: "#000000"
+        radius: 40
+        border.color: "#f9f9f9"
+        opacity: 1
+        OpacityAnimator {
+            target: rect3
+            from: 0
+            duration: 1000
+            to: 1
+            running: true
+        }
+        ParallelAnimation on border.color{
+            loops: Animation.Infinite
+            PropertyAnimation{
+                target: rect3;property: "y";easing.type: Easing.OutBounce; to:400;duration: 3000
             }
-            if(coun<5)
-            {
-//                console.log("atleast 5")
-                tf1.activeFocusOnPress=false
-                hint.text="username atleast '5' charecters"
+            SequentialAnimation{
+
+                ColorAnimation {target: rect3;property:"border.color";from: "red";to:"yellow"; duration: 500}
+                ColorAnimation{ target:element3;property:"color";from: "red";to:"yellow";duration: 500}
+                ColorAnimation {target: rect3;property:"border.color";from: "green";to:"blue"; duration: 500}
+                ColorAnimation{ target:element3;property:"color";from: "green";to:"blue";duration: 500}
+                ColorAnimation {target: rect3;property:"border.color";from: "yellow";to:"white"; duration: 500}
+                ColorAnimation{ target:element3;property:"color";from: "white";to:"red";duration: 500}
             }
         }
-    }
-    ComboBox {
-        id: comboBox
-        x: 405
-        y: 101
-        width: 341
-        height: 53
-    }
-    Timer {
-        id:time1
-            interval: 10; running: true; repeat: false
-            onTriggered: {
-                bhanu.ulist()
-            }
-    }
-    Timer {
-        id:timer1
-            interval: 10; running: true; repeat: true
-            onTriggered: {
-                //bhanu.ulist()
-             comb.popup.open()
-            }
-    }
-    TextField {
-        id: tf
-        x: 405
-        y: 203
-        width: 341
-        height: 61
-        text:""
-        placeholderText: "password"
-    }
-
-    Button {
-        id: button
-        x: 875
-        y: 101
-        width: 95
-        height: 59
-        text: qsTr("Add")
-        onClicked: popup.open()
-    }
-
-    Button {
-        id: button1
-        x: 875
-        y: 203
-        width: 97
-        height: 66
-        text: qsTr("Edit")
-    }
-
-    Button {
-        id: button2
-        x: 875
-        y: 308
-        width: 95
-        height: 58
-        text: qsTr("Delete")
-    }
-
-    Button {
-        id: button3
-        x: 463
-        y: 402
-        width: 215
-        height: 66
-        text: qsTr("LOG IN")
-    }
-
-    ComboBox{
-        id:comb
-        x: 78
-        y: 94
-        width: 262
-        height: 40
-        editable: true
-          model: ListModel {
-              id: model
-          }
-           }
         Text {
-            id: del
-
+            id: element3
+            x: 28
+            y: 24
+            color: "#ff0000"
+            //anchors.fill: parent
+            text: qsTr("L")
+            verticalAlignment: Text.AlignVCenter
+            horizontalAlignment: Text.AlignHCenter
+            font.pixelSize: 28
         }
-           Popup{
-id:popup
-x:0
-y:0
-width:parent.width-1
-height: parent.height-1
-Rectangle {
-    id: rectangle
-    x: 111
-    y: 15
-    width: 400
-    height: 51
-    color: "#fcfbfb"
-    radius: 9
-    border.width: 2
-    border.color: "#110c0c"
-
-    Text {
-        id: element1
-        x: 32
-        y: 8
-        width: 350
-        height: 30
-        color: "#110c0c"
-        text: qsTr("Create A New Account")
-        verticalAlignment: Text.AlignVCenter
-        horizontalAlignment: Text.AlignHCenter
-        font.pixelSize: 23
+        border.width: 4
     }
-    Text {
-        id: hint
-        x: 100
-        color: "red"
-        y: 417
-        text: qsTr("ENTER DETAILS")
-        verticalAlignment: Text.AlignVCenter
-        horizontalAlignment: Text.AlignHCenter
-        font.pixelSize: 20
-    }
-}
 
-Rectangle {
-    id: rectangle1
-    x: 151
-    y: 108
-    width: 338
-    height: 54
-    color: "#fcfbfb"
-    radius: 7
-    border.width: 2
-    border.color: "#110c0c"
-
-    ComboBox {
-        id: username
-        x: 8
-        y: 6
-        font.pointSize: 18
-        width: 321
-        height: 43
-        editable: true
-        currentIndex: -1
-      inputMethodHints:  Qt.ImhNone
-      onAccepted: {
-          str=username.editText
-          hint.text=str
-          bhanu.len(str)
-      }
-        displayText:"enter username"
-              model: ListModel {
-              id: model1
-          }
-    }
-}
-ComboBox {
-    id: comboBox1
-    x: 151
-    y: 261
-    width: 338
-    height: 40
-    font.pointSize: 18
-    currentIndex: -1
-    onCurrentValueChanged: {
-        comboBox1.displayText=currentText
-        if(currentIndex===0)
-        {
-            typ="O"
-            console.log(typ)
+    Rectangle {
+        id: rect7
+        x: 876
+        y: 65
+        width: 80
+        height: 80
+        color: "#000000"
+        radius: 40
+        border.color: "#f9f9f9"
+        opacity: 1
+        OpacityAnimator {
+            target: rect7
+            from: 0
+            duration: 1000
+            to: 1
+            running: true
         }
-        if(currentIndex===1)
-        {
-            typ="A"
-            console.log(typ)
+        ParallelAnimation on border.color{
+            loops: Animation.Infinite
+            PropertyAnimation{
+                target: rect7;property: "y";easing.type: Easing.OutBounce; to:400;duration: 3000
+            }
+            SequentialAnimation{
+
+                ColorAnimation {target: rect7;property:"border.color";from: "red";to:"yellow"; duration: 500}
+                ColorAnimation{ target:element7;property:"color";from: "red";to:"yellow";duration: 500}
+                ColorAnimation {target: rect7;property:"border.color";from: "green";to:"blue"; duration: 500}
+                ColorAnimation{ target:element7;property:"color";from: "green";to:"blue";duration: 500}
+                ColorAnimation {target: rect7;property:"border.color";from: "yellow";to:"white"; duration: 500}
+                ColorAnimation{ target:element7;property:"color";from: "white";to:"red";duration: 500}
+            }
         }
-        if(currentIndex===2)
-        {
-            typ="S"
-            console.log(typ)
+
+        Text {
+            id: element7
+            x: 28
+            y: 24
+            color: "#ff0000"
+            text: "E"
+            verticalAlignment: Text.AlignVCenter
+            horizontalAlignment: Text.AlignHCenter
+            font.pixelSize: 28
         }
+        border.width: 4
     }
-    displayText: "select type"
-    model :["Operator","Admin","Supervisor"]
-}
 
-Button {
-    id: login
-    x: 151
-    y: 366
-    width: 158
-    height: 40
-    text: qsTr("LOGIN")
-    onClicked: {
-        if(username.editText===username.currentText)
-        {
-            hint.text="user already existed.."
+    Rectangle {
+        id: rect4
+        x: 509
+        y: 65
+        width: 80
+        height: 80
+        color: "#000000"
+        radius: 40
+        opacity: 1
+        OpacityAnimator {
+            target: rect4
+            from: 0
+            duration: 1000
+            to: 1
+            running: true
         }
-        else
-        {
-            hint.text="username doesnot existed"
+        ParallelAnimation on border.color{
+loops: Animation.Infinite
+            PropertyAnimation{
+                target: rect4;property: "y";easing.type: Easing.InOutBounce; to:400;duration: 3000
+            }
+            SequentialAnimation{
 
-       if (tf1.length>=3)
-       {
-           if(comboBox1.currentIndex==-1)
-           {
-                  hint.text="please select type"
-           }
-           else
-           {
-               console.log("everything is perfect")
-               hint.text=str
-               model.append({text:str})
-               model1.append({text:str})
-               console.log(typ,str,pass,"fuckyou")
-             bhanu.add(typ,str,pass)
-           }
+      ColorAnimation {target: rect4;property:"border.color";from: "red";to:"yellow"; duration: 500}
+      ColorAnimation{ target:element4;property:"color";from: "red";to:"yellow";duration: 500}
 
-       }
-       else{
-           hint.text="password must be >3 "
-       }
+      ColorAnimation {target: rect4;property:"border.color";from: "green";to:"blue"; duration: 500}
+      ColorAnimation{ target:element4;property:"color";from: "green";to:"blue";duration: 500}
+
+      ColorAnimation {target: rect4;property:"border.color";from: "yellow";to:"white"; duration: 500}
+      ColorAnimation{ target:element4;property:"color";from: "white";to:"red";duration: 500}
+
+            }
+        }
+        Text {
+            id: element4
+            x: 28
+            y: 24
+            color: "#ff0000"
+            text: qsTr("C")
+            verticalAlignment: Text.AlignVCenter
+            horizontalAlignment: Text.AlignHCenter
+            font.pixelSize: 28
+        }
+        border.color: "#fdfdfd"
+        border.width: 4
     }
+
+    Rectangle {
+        id: rect5
+        x: 632
+        y: 66
+        width: 80
+        height: 79
+        color: "#000000"
+        radius: 40
+        opacity: 1
+        OpacityAnimator {
+            target: rect5
+            from: 0
+            duration: 500
+            to: 1
+            running: true
+        }
+        ParallelAnimation on border.color{
+loops: Animation.Infinite
+            PropertyAnimation{
+                target: rect5;property: "y";easing.type: Easing.OutBounce; to:400;duration: 3000
+            }
+            SequentialAnimation{
+
+      ColorAnimation {target: rect5;property:"border.color";from: "red";to:"yellow"; duration: 500}
+      ColorAnimation{ target:element5;property:"color";from: "red";to:"yellow";duration: 500}
+
+      ColorAnimation {target: rect5;property:"border.color";from: "green";to:"blue"; duration: 500}
+      ColorAnimation{ target:element5;property:"color";from: "green";to:"blue";duration: 500}
+
+      ColorAnimation {target: rect5;property:"border.color";from: "yellow";to:"white"; duration: 500}
+      ColorAnimation{ target:element5;property:"color";from: "white";to:"red";duration: 500}
+
+            }
+        }
+        Text {
+            id: element5
+            x: 28
+            y: 24
+            color: "#ff0000"
+            text: qsTr("O")
+            verticalAlignment: Text.AlignVCenter
+            horizontalAlignment: Text.AlignHCenter
+            font.pixelSize: 28
+        }
+        border.color: "#fbfbfb"
+        border.width: 4
     }
-}
 
-Button {
-    id: back
-    x: 341
-    y: 366
-    width: 148
-    height: 40
-    text: qsTr("BACK")
-    onClicked: popup.close()
-}
+    Rectangle {
+        id: rect6
+        x: 748
+        y: 65
+        width: 80
+        height: 80
+        color: "#000000"
+        radius: 40
+        opacity: 1
+        OpacityAnimator {
+            target: rect6
+            from: 0
+            duration: 500
+            to: 1
+            running: true
+        }
+        ParallelAnimation on border.color{
+loops: Animation.Infinite
+            PropertyAnimation{
+                target: rect6;property: "y";easing.type: Easing.InOutBounce; to:400;duration: 3000
+            }
+            SequentialAnimation{
 
-TextField {
-    id: tf1
-    x: 151
-    y: 187
-    width: 338
-    height: 51
-    font.pointSize: 20
-    maximumLength: 8
-    placeholderText: "enter password"
-    text: qsTr("")
-    activeFocusOnPress : false
-    echoMode:TextField.Password
-    onTextEdited: {
-        pass=tf1.text
-        console.log(pass)
+      ColorAnimation {target: rect6;property:"border.color";from: "red";to:"yellow"; duration: 500}
+      ColorAnimation{ target:element6;property:"color";from: "red";to:"yellow";duration: 500}
+
+      ColorAnimation {target: rect6;property:"border.color";from: "green";to:"blue"; duration: 500}
+      ColorAnimation{ target:element6;property:"color";from: "green";to:"blue";duration: 500}
+
+      ColorAnimation {target: rect6;property:"border.color";from: "yellow";to:"white"; duration: 500}
+      ColorAnimation{ target:element6;property:"color";from: "white";to:"red";duration: 500}
+
+            }
+        }
+
+        Text {
+            id: element6
+            x: 28
+            y: 24
+            color: "#ff0000"
+            text: qsTr("M")
+            verticalAlignment: Text.AlignVCenter
+            horizontalAlignment: Text.AlignHCenter
+            font.pixelSize: 28
+        }
+        border.color: "#fbfbfb"
+        border.width: 4
     }
-}
-           }
-
-           Frame {
-               id: frame
-               x: 78
-               y: 93
-               width: 262
-               height: 421
-
-//               ComboBox {
-//                   id: comboBox2
-//                   x: -12
-//                   y: -12
-               //                   width: 262
-               //                   height: 40
-               //               }
-           }
-
-           ComboBox {
-               id: comboBox2
-               x: 405
-               y: 299
-               width: 341
-               height: 57
-           }
-
-
 }
