@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>comp1.qml</file>
+        <file>a.qml</file>
+        <file>settings.png</file>
+        <file>sum.png</file>
+        <file>timeline.png</file>
+        <file>user.png</file>
+    </qresource>
+</RCC>
